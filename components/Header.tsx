@@ -17,7 +17,7 @@ async function Header() {
         >
             <Link className="flex items-end gap-2" href="/">
                 <Image
-                    src="/goatius.png"
+                    src="/notewhiz.png"
                     height={60}
                     width={60}
                     alt="logo"
