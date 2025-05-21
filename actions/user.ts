@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/auth/server";
+import { handleError } from "@/lib/utils";
 
 export const loginAction = async (email: string, password: string) => {
     try {
@@ -14,9 +15,7 @@ export const loginAction = async (email: string, password: string) => {
 
         return { errorMessage: null };
     } catch (error) {
-        // Handle error here
-        console.log("Error logging in:", error);
-        // return handleError(error);
+        return handleError(error);
     }
 };
 
@@ -29,9 +28,7 @@ export const logOutAction = async () => {
 
         return { errorMessage: null };
     } catch (error) {
-        // Handle error here
-        console.log("Error logging out:", error);
-        // return handleError(error);
+        return handleError(error);
     }
 };
 
@@ -51,8 +48,6 @@ export const signUpAction = async (email: string, password: string) => {
         console.log("User ID:", userId);
         return { errorMessage: null };
     } catch (error) {
-        // Handle error here
-        console.log("Error signing up:", error);
-        // return handleError(error);
+        return handleError(error);
     }
 };
