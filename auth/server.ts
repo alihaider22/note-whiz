@@ -28,15 +28,23 @@ export async function createClient() {
 }
 
 export async function getUser() {
-    const client = await createClient()
+    try {
+        const client = await createClient()
+        const { data, error } = await client.auth.getUser()
 
-    const userObject = await client.auth.getUser()
+        if (error) {
+            if (error.message?.includes('Auth session missing') ||
+                error.name === 'AuthSessionMissingError') {
+                return null
+            }
 
-    if (userObject.error) {
-        console.error('Error getting user:', userObject.error)
+            console.error('Error getting user:', error)
+            return null
+        }
+
+        return data.user
+    } catch (error) {
+        console.error('Error in getUser:', error)
         return null
     }
-
-    return userObject.data.user;
 }
-
